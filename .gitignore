@@ -1,0 +1,12 @@
+_build
+_checkouts
+Cover.html
+Cover.html_assets
+Cover.json
+erl_crash.dump
+*.log
+rebar.lock
+rebar3.crashdump
+tmp
+*.tpr
+*.pdb

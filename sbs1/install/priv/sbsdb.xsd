@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="Package">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string"/>
+                <xs:element name="ManPage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="FunctionProcedure" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:choice>
+                            <xs:element name="Function">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Name" type="xs:string"/>
+                                        <xs:element name="ManPage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="ApiHidden" type="BooleanType" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="Condition" minOccurs="0" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="IfEnd" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="ApiGroupPrivilege" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:choice>
+                                                    <xs:element name="ApiGroup" type="xs:string"/>
+                                                    <xs:element name="Privilege">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Type" type="xs:string"/>
+                                                                <xs:element name="Object" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:choice>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Parameter" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Name" type="xs:string"/>
+                                                    <xs:element name="Mode" type="ModeType" default="IN" minOccurs="0" maxOccurs="1"/>
+                                                    <xs:element name="DataType" type="xs:string"/>
+                                                    <xs:element name="DefaultValue" minOccurs="0" maxOccurs="1">
+                                                        <xs:complexType>
+                                                            <xs:choice>
+                                                                <xs:element name="Expression" type="xs:string"/>
+                                                                <xs:element name="String" type="xs:string"/>
+                                                            </xs:choice>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Return">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="DataType" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Pipelined" type="BooleanType" minOccurs="0" maxOccurs="1"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Procedure">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Name" type="xs:string"/>
+                                        <xs:element name="ManPage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="ApiHidden" type="BooleanType" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="Condition" minOccurs="0" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="IfEnd" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="ApiGroupPrivilege" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:choice>
+                                                    <xs:element name="ApiGroup" type="xs:string"/>
+                                                    <xs:element name="Privilege">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Type" type="xs:string"/>
+                                                                <xs:element name="Object" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:choice>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Parameter" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Name" type="xs:string"/>
+                                                    <xs:element name="Mode" type="ModeType" default="IN" minOccurs="0" maxOccurs="1"/>
+                                                    <xs:element name="DataType" type="xs:string"/>
+                                                    <xs:element name="DefaultValue" minOccurs="0" maxOccurs="1">
+                                                        <xs:complexType>
+                                                            <xs:choice>
+                                                                <xs:element name="Expression" type="xs:string"/>
+                                                                <xs:element name="String" type="xs:string"/>
+                                                            </xs:choice>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BooleanType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FALSE"/>
+            <xs:enumeration value="TRUE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ModeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IN OUT NOCOPY"/>
+            <xs:enumeration value="IN OUT"/>
+            <xs:enumeration value="IN"/>
+            <xs:enumeration value="OUT NOCOPY"/>
+            <xs:enumeration value="OUT"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

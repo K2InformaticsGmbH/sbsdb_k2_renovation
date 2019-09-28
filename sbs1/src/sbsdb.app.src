@@ -1,0 +1,16 @@
+%% -----------------------------------------------------------------------------
+%%
+%% sbsdb.app.src: SBSDB - tool configuration.
+%%
+%% -----------------------------------------------------------------------------
+
+{application, sbsdb,
+    [
+        {description, "A code generator for SBSDB"},
+        {vsn, "1.0.0"},
+        {applications, [
+            kernel,
+            stdlib,
+            plsql_parser
+        ]}
+    ]}.
